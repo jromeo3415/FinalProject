@@ -5,6 +5,5 @@ pydub==0.25.1
 scipy==1.11.4
 numpy==1.26.2
 matplotlib==3.8.2
-tkinter==
-tkinter.filedialog
+tkinter==8.6
 
