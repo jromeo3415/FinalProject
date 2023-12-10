@@ -21,9 +21,10 @@ def find_nearest_value(array, value):
     return array[idx]
 
 def plotrt60(file_path, freq_band, freq_name):
-    sample_rate, data = wavfile.read(file_path)  #put in file path
+    sample_rate, data = wavfile.read(file_path)
     global spectrum, freqs, t, im
     spectrum, freqs, t, im = plt.specgram(data, Fs=sample_rate, NFFT=1024, cmap=plt.get_cmap('autumn_r'))
+    plt.close()
 
     data_in_db = frequency_check(freq_band)
     plt.figure()
@@ -57,3 +58,5 @@ def plotrt60(file_path, freq_band, freq_name):
 
     plt.grid()
     plt.show()
+
+    return rt60
