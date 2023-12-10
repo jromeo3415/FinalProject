@@ -1,8 +1,9 @@
 import os.path
 from pydub import AudioSegment
+from scipy.io import wavfile
+import numpy as np
 
-
-def checkType(file):    #needs to be changed so the file is changed at the location it is at instead of returning an object (already did?)
+def checkType(file):
     fileExtension = os.path.splitext(file)[1]
     if fileExtension == ".WAV":
         return
@@ -12,7 +13,7 @@ def checkType(file):    #needs to be changed so the file is changed at the locat
         print(temp)
         return
     elif fileExtension == ".aac":
-        temp = AudioSegment.from_mp3(file)
+        temp = AudioSegment.from_mp3(file) #needs to be changed to aac not mp3
         temp.export(file, format='wav')
         print(temp)
         return
@@ -29,8 +30,15 @@ def checkMetaData(file):
     print(f"Frame Rate: {audio.frame_rate} Hz")
     print(f"Frame Width: {audio.frame_width} bytes")
     print(f"Length: {len(audio)} milliseconds")
+    return len(audio)
 
 def checkStereo(file):
     raw_audio = AudioSegment.from_file(file, format="wav")
     mono_audio = raw_audio.set_channels(1)
     mono_audio.export(file, format="wav")
+
+def makeWavArray(file_path):
+    data = wavfile.read(file_path)
+    data = np.array(data[1], dtype=np.float32)
+    normalized_data = data / np.max(np.abs(data), axis=0)
+    return normalized_data
