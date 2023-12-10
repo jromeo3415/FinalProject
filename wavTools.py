@@ -3,7 +3,7 @@ from pydub import AudioSegment
 from scipy.io import wavfile
 import numpy as np
 
-def checkType(file):
+def checkType(file):    #checks file extension and changes it if needed
     fileExtension = os.path.splitext(file)[1]
     if fileExtension == ".WAV":
         return
@@ -21,7 +21,7 @@ def checkType(file):
         print("Incompatible file type")
         return
 
-def checkMetaData(file):
+def checkMetaData(file):    #prints out metadata related to the sound file
     audio = AudioSegment.from_file(file)
 
     print("Audio Info:")
@@ -32,12 +32,12 @@ def checkMetaData(file):
     print(f"Length: {len(audio)} milliseconds")
     return len(audio)
 
-def checkStereo(file):
+def checkStereo(file):  #converts to monophonic
     raw_audio = AudioSegment.from_file(file, format="wav")
     mono_audio = raw_audio.set_channels(1)
     mono_audio.export(file, format="wav")
 
-def makeWavArray(file_path):
+def makeWavArray(file_path):    #used to obtain an array of values to plot waveform
     data = wavfile.read(file_path)
     data = np.array(data[1], dtype=np.float32)
     normalized_data = data / np.max(np.abs(data), axis=0)
