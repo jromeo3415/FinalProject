@@ -30,13 +30,17 @@ def fetchFile():    #defining button command to open file explorer and then disp
         rt2, max2 = plotrt60(file_path, 1000, "Mid Frequency")
         rt3, max3 = plotrt60(file_path, 10000, "High Frequency")
 
-        fileDisplay.insert(tk.END, f"Low Frequency RT60: {rt1}")
-        fileDisplay.insert(tk.END, f"Mid Frequency RT60: {rt2}")
-        fileDisplay.insert(tk.END, f"High Frequency RT60: {rt3}")
+        fileDisplay.insert(tk.END, f"Low Frequency RT60: {rt1:.3f}")
+        fileDisplay.insert(tk.END, f"Mid Frequency RT60: {rt2:.3f}")
+        fileDisplay.insert(tk.END, f"High Frequency RT60: {rt3:.3f}")
 
-        combinedPlots(file_path, colors)
+        #combinedPlots(file_path, colors)
         file.close()
 
+def mergeGraphs():
+    if file_path:
+        colors = ['#004bc6', '#c6000a', '#6a00c6']
+        combinedPlots(file_path, colors)
 
 #GUI
 root = tk.Tk()
@@ -46,7 +50,7 @@ button = tk.Button(root, text='Select File', width = 25, command = fetchFile)
 button.grid(row=0, column = 0)
 
 colors = ['#004bc6', '#c6000a', '#6a00c6']
-mergeButton = tk.Button(root, text='Merge Graphs', width=25)
+mergeButton = tk.Button(root, text='Merge Graphs' , width=25, command=mergeGraphs)
 mergeButton.grid(row=0, column=1)
 
 fileDisplay = tk.Listbox(root, height=5, width= 75)
