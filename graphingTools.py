@@ -76,7 +76,8 @@ def plotrt60(file_path, freq_band, freq_name):
     plt.grid()
     plt.show()
 
-    return rt60, value_of_max
+    return rt60, value_of_max_less_25, index_of_max
+
 
 def combinedPlots(file_path, colors):
     sample_rate, data = wavfile.read(file_path)

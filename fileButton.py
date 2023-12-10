@@ -21,18 +21,18 @@ def fetchFile():    #defining button command to open file explorer and then disp
         fileDisplay.insert(tk.END, f"File length: {lengthSec} seconds") #displaying length in listbox
 
         wavArray = makeWavArray(file_path) #making array of the file's data
+        print(wavArray)
         plotWaveform(length, wavArray)
 
         #plotSpectogram(file_path)   #plotting spectogram
 
-        rt1, max1 = plotrt60(file_path, 250, "Low Frequency")   #plotting and getting max frequency and RT60 values
-        rt2, max2 = plotrt60(file_path, 1000, "Mid Frequency")
-        rt3, max3 = plotrt60(file_path, 10000, "High Frequency")
+        rt1, max1, test1 = plotrt60(file_path, 250, "Low Frequency")   #plotting and getting max frequency and RT60 values
+        rt2, max2, test2 = plotrt60(file_path, 1000, "Mid Frequency")
+        rt3, max3, test3 = plotrt60(file_path, 10000, "High Frequency")
 
         rt1 = abs(rt1)  #making RT60's positive
         rt2 = abs(rt2)
         rt3 = abs(rt3)
-
         rtdif = (rt1 + rt2 + rt3) / 3
         rtdif -= 0.5
         fileDisplay.insert(tk.END, f"RT60 Difference: {rtdif:.3f} seconds")
