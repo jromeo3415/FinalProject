@@ -13,7 +13,6 @@ def fetchFile():    #defining button command to open file explorer and then disp
         file_path = file.name   #need file_path for merging graphs
         file_name = os.path.basename(file_path)
         fileDisplay.insert(tk.END, file_name)
-
         checkType(file_path)    #converting to wav
         checkStereo(file_path)  #converting to mono
         length = checkMetaData(file_path)    #printing file's data and returns wav length
@@ -33,6 +32,10 @@ def fetchFile():    #defining button command to open file explorer and then disp
         rt1 = abs(rt1)  #making RT60's positive
         rt2 = abs(rt2)
         rt3 = abs(rt3)
+
+        rtdif = (rt1 + rt2 + rt3) / 3
+        rtdif -= 0.5
+        fileDisplay.insert(tk.END, f"RT60 Difference: {rtdif:.3f} seconds")
 
         fileDisplay.insert(tk.END, f"Maximum Frequency: {max(max1, max2, max3):.3f} kHz")
 
@@ -60,7 +63,7 @@ def displayStats():
 #GUI
 root = tk.Tk()
 root.geometry('569x120')
-root.title('Sound Modeler')
+root.title('Sound Modeler    \m/')
 button = tk.Button(root, text='Select File', width = 25, command = fetchFile)   #button to display initial graphs
 button.grid(row=0, column = 0)
 

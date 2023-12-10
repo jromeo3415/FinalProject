@@ -13,7 +13,7 @@ def checkType(file):    #checks file extension and changes it if needed
         print(temp)
         return
     elif fileExtension == ".aac":
-        temp = AudioSegment.from_mp3(file) #needs to be changed to aac not mp3
+        temp = AudioSegment.from_file(file, format='aac') #needs to be changed to aac not mp3
         temp.export(file, format='wav')
         print(temp)
         return
