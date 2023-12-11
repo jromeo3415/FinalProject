@@ -7,4 +7,4 @@ The purpose of the project is to achievie a functional GUI that can accurately r
 
 ## Basic Usage Instructions
 Make sure you have Pycharm or Python equivlant installed.
-Check if yoy have the packages listed in requirements.txt
+Check if you have the packages listed in requirements.txt
